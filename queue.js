@@ -67,6 +67,8 @@ class Queue {
 
     }
 
+    //self-explanatory!
+
     reverseString(string) {
         let x;
 
@@ -83,6 +85,10 @@ class Queue {
 
         return `${string} reversed === ${reversedString}`;
     }
+
+    /* examine the string and decide if the string is “balanced” — 
+    a balanced string is one where the different kinds of brackets are properly balanced, 
+    such that you never close an bracket that isn’t opened, is out of order, or end up with unclosed brackets. */
 
     balancedBrackets(string) {
         let startBrackets = ['(','{','['];
