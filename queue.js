@@ -117,11 +117,11 @@ class Queue {
                         if (bracketCount === 0 || nodeString[x+1].toLowerCase() !== nodeString[x+1].toUpperCase()) { //check for alpha value
                             return false;
                         } 
-                        if (table[stackLeft.pop()] !== nodeString[x]) {
+                        if (stackLeft.isEmpty() || table[stackLeft.pop()] !== nodeString[x]) {
                             return false;
                         }
                     } catch {
-                        if (table[stackLeft.pop()] !== nodeString[x]) {
+                        if (stackLeft.isEmpty() || table[stackLeft.pop()] !== nodeString[x]) {
                             return false;
                         }
                     }
