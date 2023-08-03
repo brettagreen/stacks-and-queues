@@ -1,4 +1,4 @@
-const Deque = require("./deque");
+const Stack = require("./stack");
 
 /** Node: node for a queue. */
 
@@ -95,9 +95,10 @@ class Queue {
     /** WIP */
 
     balancedBrackets(string) {
-        let startBrackets = ['(','{','['];
-        let endBrackets = [')','}',']'];
-        //const deque = new Deque();
+        const startBrackets = ['(','{','['];
+        const endBrackets = [')','}',']'];
+        const table = { '(': ')', '{': '}', '[': ']'};
+        const stackLeft = new Stack();
 
         const splitString = string.split(' ');
 
@@ -106,21 +107,23 @@ class Queue {
         }
 
         let currentNode = this.first;
-        let bracketCount = 0;
 
         while (currentNode) {
 
-            let nodeString = currentNode.val
+            let nodeString = currentNode.val;
             for (let x = 0; x < nodeString.length; x++) {
                  if (endBrackets.includes(nodeString[x])) {
                     try {
                         if (bracketCount === 0 || nodeString[x+1].toLowerCase() !== nodeString[x+1].toUpperCase()) { //check for alpha value
                             return false;
                         } 
-                        //deque.appendRight(nodeString[x]);
-                        bracketCount--;
+                        if (table[stackLeft.pop()] !== nodeString[x]) {
+                            return false;
+                        }
                     } catch {
-                        bracketCount--;
+                        if (table[stackLeft.pop()] !== nodeString[x]) {
+                            return false;
+                        }
                     }
   
                 } else if (startBrackets.includes(nodeString[x])) {
@@ -128,29 +131,23 @@ class Queue {
                         if (nodeString[x-1].toLowerCase() !== nodeString[x-1].toUpperCase()) { //check for alpha value
                             return false;
                         }
-                        debugger
-                        //deque.appendLeft(nodeString[x]);
-                        bracketCount++;
+                        stackLeft.push(nodeString[x]);
                     } catch {
-                        bracketCount++;
+                        stackLeft.push(nodeString[x]);
                     }
 
                 }               
             }
             currentNode = currentNode.next;
         }
-        if (bracketCount > 0) {
-            // if (!deque.isEmpty()) {
-            //     while(!deque.isEmpty()) {
-            //         if (deque.popLeft() !== deque.popRight()) {
-            //             return false;
-            //         }
-            //     }
-            // }
+        if (!stackLeft.isEmpty()) {
+            return false;
+        } else {
             return true;
         }
-
+    
     }
+
 }
 
 function iterate(q) {
@@ -163,17 +160,7 @@ function iterate(q) {
 }
 
 const queue = new Queue();
-// queue.enqueue("dickens");
-// queue.enqueue("charles");
-// queue.enqueue("1");
-// queue.enqueue("2");
-// queue.enqueue("last");
-// iterate(queue);
-// console.log(queue.dequeue());
-// console.log(queue.dequeue());
-// console.log(queue.peek());
-//console.log(queue.reverseString("excellent"));
-console.log(queue.balancedBrackets('(hi [there])'));
+console.log(queue.balancedBrackets('(hello [[goodbye]])'));
 
 
 module.exports = Queue;

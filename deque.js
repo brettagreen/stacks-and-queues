@@ -21,17 +21,15 @@ class Deque {
     /** appendLeft(val): add new value to beginning of the deque. Returns undefined. */
 
     appendLeft(val) {
-        console.log('val',val);
         let node = new Node(val);
         if (this.size === 0) {
-            this.last = node;
-            this.last.prior = this.first;
             this.first = node;
-            this.first.next = this.last;
+            this.first.next = null;
         } else {
             let prior = this.first;
             this.first = node;
             this.first.next = prior;
+            this.first.prev = null;
             prior.prev = this.first;
         }
         this.size++;
@@ -40,16 +38,16 @@ class Deque {
     /** appendRight(val): add new value to end of the deque. Returns undefined. */
 
     appendRight(val) {
-        console.log('val', val);
         let node = new Node(val);
         if (this.size === 0) {
             this.last = node;
-            this.first = node;
+            this.last.prev = null;
         } else {
             let prior = this.last;
             this.last = node;
             prior.next = this.last
             this.last.prev = prior;
+            this.last.next = null;
         }
         this.size++;
     }
@@ -133,18 +131,5 @@ function iterate(d) {
     }
 }
 
-// const deque = new Deque();
-// deque.appendLeft("hi");
-// deque.appendLeft("hello");
-// deque.appendLeft("howdy");
-// deque.appendRight("goodbye");
-// deque.appendRight("see ya");
-// deque.appendRight("ciao");
-// iterate(deque);
-// console.log();
-// console.log(deque.popLeft());
-// console.log(deque.popRight());
-// console.log();
-// iterate(deque);
 
 module.exports = Deque;

@@ -132,25 +132,5 @@ function iterate(s) {
     }
 }
 
-// const stack = new Stack();
-// stack.push("i'm last");
-// stack.push("i'm in the middle");
-// stack.push("i'm first");
-// console.log(stack.pop());
-// console.log(stack.pop());
-
-// const browserStack = new BrowserStack();
-// browserStack.push('www.google.com');
-// browserStack.push('www.yahoo.com');
-// browserStack.push('www.ebay.com');
-// browserStack.push('www.nutz.com');
-// browserStack.push('www.hoobastank.com');
-// console.log(browserStack.goBack());
-// console.log(browserStack.goBack());
-// console.log(browserStack.goFwd());
-// console.log(browserStack.goFwd());
-// console.log(browserStack.goFwd());
-// console.log(browserStack.goFwd());
-// console.log(browserStack.goFwd());
 
 module.exports = Stack;
