@@ -1,3 +1,5 @@
+const Deque = require("./deque");
+
 /** Node: node for a queue. */
 
 class Node {
@@ -90,9 +92,12 @@ class Queue {
     a balanced string is one where the different kinds of brackets are properly balanced, 
     such that you never close an bracket that isn’t opened, is out of order, or end up with unclosed brackets. */
 
+    /** WIP */
+
     balancedBrackets(string) {
         let startBrackets = ['(','{','['];
         let endBrackets = [')','}',']'];
+        const deque = new Deque();
 
         const splitString = string.split(' ');
 
@@ -104,6 +109,7 @@ class Queue {
         let bracketCount = 0;
 
         while (currentNode) {
+            debugger
             let nodeString = currentNode.val
             for (let x = 0; x < nodeString.length; x++) {
                  if (endBrackets.includes(nodeString[x])) {
@@ -111,6 +117,7 @@ class Queue {
                         if (bracketCount === 0 || nodeString[x+1].toLowerCase() !== nodeString[x+1].toUpperCase()) { //check for alpha value
                             return false;
                         } 
+                        deque.appendRight(nodeString[x]);
                         bracketCount--;
                     } catch {
                         bracketCount--;
@@ -121,6 +128,7 @@ class Queue {
                         if (nodeString[x-1].toLowerCase() !== nodeString[x-1].toUpperCase()) { //check for alpha value
                             return false;
                         }
+                        deque.appendLeft(nodeString[x]);
                         bracketCount++;
                     } catch {
                         bracketCount++;
@@ -130,8 +138,17 @@ class Queue {
             }
             currentNode = currentNode.next;
         }
+        if (bracketCount > 0) {
+            if (!deque.isEmpty()) {
+                while(!deque.isEmpty()) {
+                    if (deque.popLeft() !== deque.popRight()) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
 
-        return bracketCount > 0 ? false : true;
     }
 }
 

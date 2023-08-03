@@ -21,6 +21,7 @@ class Deque {
     /** appendLeft(val): add new value to beginning of the deque. Returns undefined. */
 
     appendLeft(val) {
+        console.log('val',val);
         let node = new Node(val);
         if (this.size === 0) {
             this.last = node;
