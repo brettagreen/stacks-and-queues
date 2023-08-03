@@ -159,8 +159,5 @@ function iterate(q) {
     }
 }
 
-const queue = new Queue();
-console.log(queue.balancedBrackets('(hello [[goodbye]])'));
-
 
 module.exports = Queue;
