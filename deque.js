@@ -40,6 +40,7 @@ class Deque {
     /** appendRight(val): add new value to end of the deque. Returns undefined. */
 
     appendRight(val) {
+        console.log('val', val);
         let node = new Node(val);
         if (this.size === 0) {
             this.last = node;
