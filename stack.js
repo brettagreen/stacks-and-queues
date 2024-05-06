@@ -65,9 +65,7 @@ class Stack {
     /** isEmpty(): return true if the stack is empty, otherwise false */
 
     isEmpty() {
-
-        return this.size === 0 ? true : false;
-
+        return this.size === 0;
     }
 
 }
@@ -120,7 +118,32 @@ class BrowserStack {
             return returnVal;
         }
     }
+}
 
+/* examine the string and decide if the string is “balanced” — 
+a balanced string is one where the different kinds of brackets are properly balanced, 
+such that you never close an bracket that isn’t opened, is out of order, or end up with unclosed brackets. */
+function balancedBrackets(string) {
+    const startBrackets = ['(','{','['];
+    const endBrackets = [')','}',']'];
+    const table = { '(': ')', '{': '}', '[': ']'};
+    const stackLeft = new Stack();
+    let char;
+
+    for (let x = 0; x < string.length; x++) {
+        char = string[x];
+        if (endBrackets.includes(char)) {
+            if (x === 0 || stackLeft.isEmpty() || table[stackLeft.pop()] !== char) {
+                return false;
+            } 
+        } else if (startBrackets.includes(char)) {
+            stackLeft.push(char);
+        } else {
+            continue;
+        }
+    }
+    
+    return true;
 }
 
 function iterate(s) {
@@ -133,4 +156,8 @@ function iterate(s) {
 }
 
 
-module.exports = Stack;
+module.exports = {
+    Stack,
+    BrowserStack,
+    balancedBrackets
+}
